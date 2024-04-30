@@ -6,7 +6,7 @@ const stratagems = [
    eagle = [ order1 = [1, 2, 3, 3, 3], order2 = [1, 2, 3, 3, 2], order3 = [1, 2, 3, 2], order4 = [1, 2, 2], order5 = [1, 1, 4, 1, 2], order6 = [1, 2, 3, 1], order7 = [1, 2, 1, 3], order8 = [1, 2, 1, 4] ],
    orbital = [ order1 = [2, 2, 1], order2 = [2, 2, 2], order3 = [2, 2, 3, 4, 2, 3], order4 = [2, 3, 1, 1, 4, 3, 3], order5 = [2, 3, 2, 3, 2, 3], order6 = [2, 3, 1, 2, 3], order7 = [2, 1, 3, 3, 2], order8 = [2, 2, 3, 2], order9 = [2, 2, 3, 1], order10 = [2, 3, 4, 1, 1] ],
    support = [ order1 = [1, 3, 2, 4, 1], order2 = [1, 3, 4, 2], order3 = [3, 3, 1, 2], order4 = [2, 1, 1, 3], order5 = [3, 1, 4, 3, 1, 2, 3, 1], order6 = [3, 3, 3, 1, 1], order7= [4, 2, 1, 1, 1], order8 = [1, 1, 4, 2, 3, 3], order9 = [3, 3, 4, 2, 3, 3], order10 = [3, 1, 3, 1], order11 = [2, 2, 4, 4] ],
-   backpack = [ order1 = [3, 1, 4, 1, 2, 2], order2 = [3, 1, 4, 1, 2, 3], order3 = [3, 1, 1, 3, 1], order4 = [3, 1, 3, 3, 2], order5 = [3, 1, 4, 2, 4, 2], order6 = [3, 4, 3, 3, 1, 4] ],
+   backpack = [ order1 = [3, 1, 4, 1, 2, 2], order2 = [3, 1, 4, 1, 2, 3], order3 = [3, 1, 1, 3, 1], order4 = [3, 1, 3, 3, 1], order5 = [3, 1, 4, 2, 4, 2], order6 = [3, 4, 3, 3, 1, 4] ],
    weapon = [ order1 = [3, 4, 3, 1, 1, 2], order2 = [3, 3, 4, 1, 2], order3 = [3, 4, 3, 2, 4], order4 = [3, 4, 3, 1, 4], order5 = [3, 4, 3, 1, 1, 4], order6 = [3, 4, 3, 1, 2], order7= [3, 2, 3, 1, 4, 4], order8 = [3, 4, 1, 4, 3], order9 = [3, 4, 2, 1, 3], order10 = [3, 2, 3, 1, 4, 2], order11 = [3, 4, 2, 2, 4], order12 = [3, 3, 1, 3, 3], order13 = [3, 3, 1, 4, 2], order14 = [3, 4, 1, 3, 3] ],
    sentry = [ order1 = [3, 1, 4, 2, 2, 4], order2 = [3, 3, 4, 2, 4, 2], order3 = [3, 1, 2, 1, 4, 2], order4 = [3, 4, 3, 2], order5 = [3, 4, 4, 3], order6 = [3, 1, 2, 2, 1], order7= [3, 1, 2, 4], order8 = [3, 1, 2, 2, 3], order9 = [3, 1, 2, 1, 4, 1], order10 = [3, 1, 2, 2, 4], order11 = [3, 1, 2, 3, 2 ] ],
    vehicle = [ order1 = [4, 3, 2, 1, 4, 3, 3] ]
@@ -31,7 +31,7 @@ function preload(){
 }
 
 function setup(){
-    canvas = createCanvas(600, 600)
+    canvas = createCanvas(1000, 1000)
     frameRate(80) 
     background(rgb(69, 69, 69))
     arrowGroup=new Group()
@@ -68,7 +68,7 @@ function arrows(){
     arrowFrame.x += count * 70
 
     var arrowRotation = stratagems[setSelect][orderselect][count]
-    var arrowFrameColour = setSelect
+    //var arrowFrameColour = setSelect
 
     switch(arrowRotation){
         case 1:
@@ -99,38 +99,9 @@ function arrows(){
             break
     }
 
-    switch(arrowFrameColour){
-         case 1:
-         arrowFrame.setFrame(1)
-         break
+    arrowFrame.setFrame(setSelect)
 
-         case 2:
-         arrowFrame.setFrame(2)
-         break
-
-         case 3:
-         arrowFrame.setFrame(3)
-         break
-
-         case 4:
-         arrowFrame.setFrame(4)
-         break
-
-         case 5:
-         arrowFrame.setFrame(5)
-         break
-
-         case 6:
-         arrowFrame.setFrame(6)
-         break
-
-         case 7:
-         arrowFrame.setFrame(7)
-         break
-
-         default:
-            break
-   }
+    
     arrowGroup.add(arrow)
     arrowFrameGroup.add(arrowFrame)
 }
@@ -154,7 +125,7 @@ function reset() {
    arrowGroup.destroyEach(), arrowFrameGroup.destroyEach()
    arrowGroup.clear(), arrowFrameGroup.clear()
    arrowGroup.remove(arrow), arrowFrameGroup.remove(arrowFrame)
-   canvas = createCanvas(600, 600)
+   canvas = createCanvas(1000, 1000)
    background(rgb(69, 69, 69))
    count = 0
    inputCount = 0
