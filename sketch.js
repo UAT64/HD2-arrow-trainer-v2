@@ -1,3 +1,4 @@
+
 var position
 var rotation
 var count = 0
@@ -10,9 +11,7 @@ const stratagems = [
    weapon = [ order1 = [3, 4, 3, 1, 1, 2], order2 = [3, 3, 4, 1, 2], order3 = [3, 4, 3, 2, 4], order4 = [3, 4, 3, 1, 4], order5 = [3, 4, 3, 1, 1, 4], order6 = [3, 4, 3, 1, 2], order7= [3, 2, 3, 1, 4, 4], order8 = [3, 4, 1, 4, 3], order9 = [3, 4, 2, 1, 3], order10 = [3, 2, 3, 1, 4, 2], order11 = [3, 4, 2, 2, 4], order12 = [3, 3, 1, 3, 3], order13 = [3, 3, 1, 4, 2], order14 = [3, 4, 1, 3, 3] ],
    sentry = [ order1 = [3, 1, 4, 2, 2, 4], order2 = [3, 3, 4, 2, 4, 2], order3 = [3, 1, 2, 1, 4, 2], order4 = [3, 4, 3, 2], order5 = [3, 4, 4, 3], order6 = [3, 1, 2, 2, 1], order7= [3, 1, 2, 4], order8 = [3, 1, 2, 2, 3], order9 = [3, 1, 2, 1, 4, 1], order10 = [3, 1, 2, 2, 4], order11 = [3, 1, 2, 3, 2 ] ],
    vehicle = [ order1 = [4, 3, 2, 1, 4, 3, 3] ]
-   ]
-
-   
+]
 var orderselect, setSelect
 var canvas
 let arrow, arrowFrame
@@ -24,6 +23,8 @@ var arrowFrameGroup
 var input
 var drawing = true
 var correctValue = 0
+var score
+
 
 function preload(){
     arrowEmpty_img = loadAnimation("Arrow_empty.png","Arrow_filled.png")
@@ -31,13 +32,14 @@ function preload(){
 }
 
 function setup(){
-    canvas = createCanvas(1000, 1000)
+   canvas = createCanvas(window.width = window.innerWidth, window.height = window.innerHeight)
     frameRate(80) 
     background(rgb(69, 69, 69))
     arrowGroup=new Group()
     arrowFrameGroup=new Group()
     comboSelect()
-    //arrow.debug = false
+    //arrow.debug = true
+    //arrowFrame.debug = true
 }
 
 
@@ -48,8 +50,10 @@ function comboSelect(){
 
 function arrows(){
     console.log("arrows called")
-    arrow = createSprite(100,100)
-    arrowFrame = createSprite(100,100)
+    arrow = createSprite(window.width * 0.1,window.height * 0.1)
+    arrowFrame = createSprite(window.width * 0.1,window.height * 0.1)
+    arrowFrame.depth = arrow.depth += 1
+
 
     arrow.addAnimation("arrowAnim", arrowEmpty_img)
     arrow.pause()
@@ -64,8 +68,8 @@ function arrows(){
     arrowFrame.scale = 0.12
     rectMode(CENTER)
 
-    arrow.x += count * 70
-    arrowFrame.x += count * 70
+    arrow.x += count * 100
+    arrowFrame.x += count * 100
 
     var arrowRotation = stratagems[setSelect][orderselect][count]
     //var arrowFrameColour = setSelect
@@ -125,7 +129,7 @@ function reset() {
    arrowGroup.destroyEach(), arrowFrameGroup.destroyEach()
    arrowGroup.clear(), arrowFrameGroup.clear()
    arrowGroup.remove(arrow), arrowFrameGroup.remove(arrowFrame)
-   canvas = createCanvas(1000, 1000)
+   canvas = createCanvas(window.width = window.innerWidth, window.height = window.innerHeight)
    background(rgb(69, 69, 69))
    count = 0
    inputCount = 0
@@ -139,6 +143,9 @@ function draw(){
    //console.log("count is: ", count)
    //console.log("inputCount is: ", inputCount)
    //console.log("drawing is: ", drawing)
+
+   //window.width = window.innerWidth
+   //window.height = window.innerHeight
 
      if(count != stratagems[setSelect][orderselect].length){
         arrows()
@@ -177,6 +184,8 @@ function draw(){
 
      if(correctValue == stratagems[setSelect][orderselect].length ||  stratagems[setSelect][orderselect][inputCount] ==5 ){
       console.log("Correct inputs")
+      score += stratagems[setSelect][orderselect].length * 10
+      console.log(score)
       reset()
       comboSelect()
 
